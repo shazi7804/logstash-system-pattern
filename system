@@ -1,0 +1,7 @@
+CRONLOG_TIME_ISO8601 (?:%{SYSLOGTIMESTAMP:timestamp}|%{TIMESTAMP_ISO8601:timestamp}) (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}: \(%{USER:user}\) %{CRON_ACTION:action} \(%{DATA:message}\)
+
+CRONLOG_RUN_PARTS (?:%{SYSLOGTIMESTAMP:timestamp}|%{TIMESTAMP_ISO8601:timestamp}) (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} run\-parts\(%{DATA:cron_daily}\)(?:\[%{POSINT:pid}\])?\: %{GREEDYDATA:message}
+
+COMMANDLOG_SUDO date=%{DATE_BASIC:timestamp},from=%{IPORHOST:clientip} %{POSINT:local_port} %{POSINT:remote_port}\,login=%{DATA:login_user}\,user=%{DATA:switch_user},pwd=%{DATA:path}\,exec=%{DATA:command}
+
+COMMANDLOG_SU date=%{DATE_BASIC:timestamp},from=,login=%{DATA:login_user}\,user=%{DATA:switch_user},pwd=%{DATA:path}\,exec=%{DATA:command}
