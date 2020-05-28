@@ -1,0 +1,14 @@
+COMPID \[%{POSINT:pid}\]:
+QUEUEID (?:[A-F0-9]+|NOQUEUE)
+EMAILADDRESS %{EMAILADDRESSPART:local}@%{EMAILADDRESSPART:remote}
+EMAILADDRESSPART [a-zA-Z0-9_.+-=:]+
+RELAY (?:%{HOSTNAME:relayhost}(?:\[%{IP:relayip}\](?::[0-9]+(.[0-9]+)?)?)?)
+POSREAL [0-9]+(.[0-9]+)?
+DSN %{NONNEGINT}.%{NONNEGINT}.%{NONNEGINT}
+STATUS sent|deferred|bounced|expired
+
+POSTFIXSMTP %{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} postfix/smtp%{COMPID} %{QUEUEID:qid}: to=<%{EMAILADDRESS}>, relay=%{RELAY}, delay=%{POSREAL}, (%{WORD}=%{DATA},)+ dsn=%{DSN:dsn}, status=%{STATUS:result} %{GREEDYDATA:reason}
+POSTFIXSMTPPIPE %{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} postfix/pipe%{COMPID} %{QUEUEID:qid}: to=<%{EMAILADDRESS}>, relay=%{RELAY}, delay=%{POSREAL}, (%{WORD}=%{DATA},)+ dsn=%{DSN:dsn}, status=%{STATUS:result} %{GREEDYDATA:reason}
+POSTFIXSMTPERROR %{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} postfix/error%{COMPID} %{QUEUEID:qid}: to=<%{EMAILADDRESS}>, relay=%{RELAY}, delay=%{POSREAL}, (%{WORD}=%{DATA},)+ dsn=%{DSN:dsn}, status=%{STATUS:result} %{GREEDYDATA:reason}
+POSTFIXSMTPCONN %{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} postfix/smtp%{COMPID} %{QUEUEID:qid}: to=<%{EMAILADDRESS}>, relay=%{RELAY}, conn_use=%{QUEUEID}, delay=%{POSREAL}, (%{WORD}=%{DATA},)+ dsn=%{DSN:dsn}, status=%{STATUS:result} %{GREEDYDATA:reason}
+YAHOOSMTP %{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} smtp-yahoo/smtp%{COMPID} %{QUEUEID:qid}: to=<%{EMAILADDRESS}>, relay=%{RELAY}, delay=%{POSREAL}, (%{WORD}=%{DATA},)+ dsn=%{DSN:dsn}, status=%{STATUS:result} %{GREEDYDATA:reason}
