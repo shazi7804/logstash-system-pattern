@@ -15,7 +15,9 @@ Defined logstash grok pattern for system log
   - COMMANDLOG_SUDO
   - COMMANDLOG_SU
 
-- command log format of this
+# Command log 
+
+setting format of this
 
 ```
 # /etc/profile.d/prompt_command.sh
